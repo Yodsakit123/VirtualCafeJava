@@ -1,21 +1,53 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Instant;
 
 public class DataManager {
     private static final String FILE = "data.json";
-    private static final Gson gson = new GsonBuilder()
+    
+    // Custom adapter for java.time.Instant
+    private static class InstantAdapter extends TypeAdapter<Instant> {
+        @Override
+        public void write(JsonWriter out, Instant value) throws IOException {
+            if (value == null) {
+                out.nullValue();
+            } else {
+                out.value(value.toString());
+            }
+        }
+
+        @Override
+        public Instant read(JsonReader in) throws IOException {
+            String value = in.nextString();
+            return value == null ? null : Instant.parse(value);
+        }
+    }
+    
+    // Gson for file storage (with pretty printing for readability)
+    private static final Gson FILE_GSON = new GsonBuilder()
             .setPrettyPrinting()
             .serializeNulls()
+            .registerTypeAdapter(Instant.class, new InstantAdapter())
+            .create();
+    
+    // Gson for network communication (compact, single line - NO pretty printing)
+    private static final Gson NETWORK_GSON = new GsonBuilder()
+            .serializeNulls()
+            .registerTypeAdapter(Instant.class, new InstantAdapter())
             .create();
 
     public static synchronized void saveCafeState(CafeState state) {
         try (FileWriter w = new FileWriter(FILE)) {
-            gson.toJson(state, w);
+            FILE_GSON.toJson(state, w);
             System.out.println("[Data] Saved to " + FILE);
         } catch (Exception e) {
             System.err.println("[Data] Save failed: " + e.getMessage());
@@ -29,7 +61,7 @@ public class DataManager {
                 return new CafeState();
             }
             try (FileReader r = new FileReader(FILE)) {
-                CafeState state = gson.fromJson(r, CafeState.class);
+                CafeState state = FILE_GSON.fromJson(r, CafeState.class);
                 if (state == null) state = new CafeState();
                 System.out.println("[Data] Loaded from " + FILE);
                 return state;
@@ -40,5 +72,9 @@ public class DataManager {
         }
     }
 
-    public static Gson gson() { return gson; }
+    // This is used by all network communication (ClientApi, BaristaServer)
+    // Returns compact JSON without newlines
+    public static Gson gson() { 
+        return NETWORK_GSON; 
+    }
 }

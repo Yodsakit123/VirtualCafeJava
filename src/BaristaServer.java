@@ -43,23 +43,50 @@ public class BaristaServer {
 
             String line;
             while ((line = in.readLine()) != null) {
-                if (line.trim().isEmpty()) continue;  // 🛠️ skip blank input
+                System.out.println("[Server] Received: " + line); // Debug line
+                
+                if (line.trim().isEmpty()) {
+                    System.out.println("[Server] Skipping empty line");
+                    continue;
+                }
+                
                 try {
                     Message req = DataManager.gson().fromJson(line, Message.class);
-                    if (req == null) continue; // 🛠️ invalid JSON, ignore
+                    if (req == null || req.action == null || req.payload == null) {
+                        System.err.println("[Server] Invalid message format");
+                        sendError(out, "Invalid message format");
+                        continue;
+                    }
+                    
                     Message resp = process(req);
-                    out.write(DataManager.gson().toJson(resp));
+                    String respJson = DataManager.gson().toJson(resp);
+                    System.out.println("[Server] Sending: " + respJson); // Debug line
+                    out.write(respJson);
                     out.write("\n");
                     out.flush();
                 } catch (Exception ex) {
-                    System.err.println("[Server] JSON parse error: " + ex.getMessage());
+                    System.err.println("[Server] Error processing request: " + ex.getMessage());
+                    ex.printStackTrace();
+                    sendError(out, ex.getMessage());
                 }
             }
 
         } catch (Exception e) {
             System.err.println("[Server] Client error " + remote + ": " + e.getMessage());
+            e.printStackTrace();
         } finally {
             System.out.println("[Server] Client disconnected: " + remote);
+        }
+    }
+
+    private void sendError(BufferedWriter out, String message) {
+        try {
+            Message errorMsg = new Message("ERROR", "{\"reason\":\"" + message.replace("\"", "'") + "\"}");
+            out.write(DataManager.gson().toJson(errorMsg));
+            out.write("\n");
+            out.flush();
+        } catch (IOException e) {
+            System.err.println("[Server] Failed to send error response: " + e.getMessage());
         }
     }
 
@@ -104,6 +131,7 @@ public class BaristaServer {
                     return new Message("ERROR", "{\"reason\":\"unknown_action\"}");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return new Message("ERROR", "{\"reason\":\"" + e.getMessage().replace("\"","'") + "\"}");
         }
     }

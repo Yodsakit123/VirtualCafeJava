@@ -24,4 +24,33 @@ public class Order {
     public double total() {
         return quantity * priceEach;
     }
+    
+    // Getters required for JavaFX PropertyValueFactory
+    public int getId() {
+        return id;
+    }
+    
+    public String getCustomerName() {
+        return customerName;
+    }
+    
+    public String getItem() {
+        return item;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    public double getPriceEach() {
+        return priceEach;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+    
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 }
