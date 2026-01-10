@@ -107,7 +107,7 @@ public class BaristaDashboard extends Application {
         column.setMinWidth(350);
         
         Label titleLabel = new Label(title);
-        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
         
@@ -182,21 +182,21 @@ public class BaristaDashboard extends Application {
         HBox header = new HBox();
         header.setAlignment(Pos.CENTER_LEFT);
         Label orderNum = new Label("Order #" + order.id);
-        orderNum.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        orderNum.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;");
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         String timeStr = TIME_FORMATTER.format(order.createdAt);
         Label timeLabel = new Label(timeStr);
-        timeLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #666;");
+        timeLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #333;");
         header.getChildren().addAll(orderNum, spacer, timeLabel);
         
         // Customer name
         Label customerLabel = new Label("👤 " + order.customerName);
-        customerLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        customerLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;");
         
         // Item details
         Label itemLabel = new Label(String.format("%dx %s", order.quantity, order.item));
-        itemLabel.setStyle("-fx-font-size: 16px;");
+        itemLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: black;");
         
         // Price
         Label priceLabel = new Label(String.format("£%.2f", order.total()));
