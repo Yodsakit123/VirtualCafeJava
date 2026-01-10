@@ -1,0 +1,59 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "customerName": "First",
+      "item": "Orange Juice",
+      "quantity": 1,
+      "priceEach": 3.5,
+      "status": "SERVED",
+      "createdAt": "2026-01-10T02:59:59.128650100Z"
+    },
+    {
+      "id": 2,
+      "customerName": "First",
+      "item": "Iced Tea",
+      "quantity": 1,
+      "priceEach": 3.0,
+      "status": "SERVED",
+      "createdAt": "2026-01-10T02:59:59.145415400Z"
+    },
+    {
+      "id": 3,
+      "customerName": "First",
+      "item": "Croissant",
+      "quantity": 1,
+      "priceEach": 3.0,
+      "status": "SERVED",
+      "createdAt": "2026-01-10T02:59:59.147923100Z"
+    },
+    {
+      "id": 4,
+      "customerName": "Palmer",
+      "item": "Brownie",
+      "quantity": 1,
+      "priceEach": 3.5,
+      "status": "SERVED",
+      "createdAt": "2026-01-10T03:08:40.545661900Z"
+    },
+    {
+      "id": 5,
+      "customerName": "Palmer",
+      "item": "Flat White",
+      "quantity": 1,
+      "priceEach": 3.8,
+      "status": "SERVED",
+      "createdAt": "2026-01-10T03:08:40.552010300Z"
+    },
+    {
+      "id": 6,
+      "customerName": "Palmer",
+      "item": "Salad",
+      "quantity": 2,
+      "priceEach": 8.0,
+      "status": "SERVED",
+      "createdAt": "2026-01-10T03:08:40.554013400Z"
+    }
+  ],
+  "nextOrderId": 7
+}
