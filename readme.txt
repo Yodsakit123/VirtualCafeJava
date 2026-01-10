@@ -1,0 +1,1 @@
+This project works with java version 25
