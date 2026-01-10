@@ -352,7 +352,7 @@ public class CafePOS extends Application {
         if (cartItems.isEmpty()) {
             Label empty = new Label("Cart is empty");
             empty.setFont(Font.font("Arial", 14));
-            empty.setTextFill(Color.GRAY);
+            empty.setTextFill(Color.BLACK);
             cartBox.getChildren().add(empty);
         } else {
             for (CartItem item : cartItems) {
@@ -373,9 +373,10 @@ public class CafePOS extends Application {
         VBox info = new VBox(5);
         Label name = new Label(cartItem.menuItem.name);
         name.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+        name.setTextFill(Color.BLACK);
         Label price = new Label(String.format("£%.2f", cartItem.menuItem.price));
         price.setFont(Font.font("Arial", 11));
-        price.setTextFill(Color.GRAY);
+        price.setTextFill(Color.web("#333333"));
         info.getChildren().addAll(name, price);
         HBox.setHgrow(info, Priority.ALWAYS);
         
@@ -397,6 +398,7 @@ public class CafePOS extends Application {
         
         Label qty = new Label(String.valueOf(cartItem.quantity));
         qty.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        qty.setTextFill(Color.BLACK);
         qty.setMinWidth(30);
         qty.setAlignment(Pos.CENTER);
         
@@ -414,6 +416,7 @@ public class CafePOS extends Application {
         Label itemTotal = new Label(String.format("£%.2f", 
             cartItem.menuItem.price * cartItem.quantity));
         itemTotal.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        itemTotal.setTextFill(Color.BLACK);
         itemTotal.setMinWidth(60);
         itemTotal.setAlignment(Pos.CENTER_RIGHT);
         
