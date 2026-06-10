@@ -1,25 +1,25 @@
 @echo off
 echo ========================================
-echo  Virtual Cafe Java - Launch All
+echo  Virtual Cafe Java - Launch All (Maven)
 echo ========================================
 echo.
 echo This will open 4 windows:
-echo   1. Barista Server (must stay open)
+echo   1. Spring Boot Backend (must stay open)
 echo   2. Customer CLI
 echo   3. Customer GUI
 echo   4. Barista Dashboard
 echo.
-echo IMPORTANT: Make sure you have compiled first!
+echo IMPORTANT: Make sure you have built the project first!
 echo            Run 1-compile.bat if you haven't.
 echo.
 pause
 
 echo.
-echo Starting Barista Server...
-start "Barista Server" cmd /k 2-run-server.bat
+echo Starting Spring Boot Backend...
+start "Spring Boot Backend API" cmd /k 2-run-server.bat
 
-echo Waiting for server to start...
-timeout /t 3 /nobreak > nul
+echo Waiting for backend to start (Warm up)...
+timeout /t 5 /nobreak > nul
 
 echo Starting Customer CLI...
 start "Customer CLI" cmd /k 3-run-customer-cli.bat
@@ -34,10 +34,6 @@ echo.
 echo ========================================
 echo  All applications launched!
 echo ========================================
-echo.
-echo To stop the system:
-echo   Close the "Barista Server" window
-echo   or press Ctrl+C in the server window
 echo.
 echo You can now close this window.
 pause
