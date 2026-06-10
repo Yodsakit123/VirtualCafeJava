@@ -1,0 +1,15 @@
+com\virtualcafe\frontend\CustomerGUI$2.class
+com\virtualcafe\frontend\Message.class
+com\virtualcafe\frontend\DataManager.class
+com\virtualcafe\frontend\Order.class
+com\virtualcafe\frontend\DataManager$InstantAdapter.class
+com\virtualcafe\frontend\CustomerGUI$1.class
+com\virtualcafe\frontend\CustomerCLI$1.class
+com\virtualcafe\frontend\CustomerGUI.class
+com\virtualcafe\frontend\CustomerCLI.class
+com\virtualcafe\frontend\BaristaDashboard$1.class
+com\virtualcafe\frontend\ClientApi.class
+com\virtualcafe\frontend\BaristaDashboard.class
+com\virtualcafe\frontend\CafePOS$MenuItem.class
+com\virtualcafe\frontend\CafePOS$CartItem.class
+com\virtualcafe\frontend\CafePOS.class
